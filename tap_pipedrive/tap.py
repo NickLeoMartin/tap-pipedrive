@@ -54,7 +54,15 @@ class PipedriveTap(object):
             schema = Schema.from_dict(stream.get_schema())
             key_properties = stream.key_properties
 
-            metadata = []
+            metadata = [{
+                "metadata": {
+                    "inclusion": "available",
+                    "table-key-properties": ["id"],
+                    "selected": True,
+                    "schema-name": stream.get_name()
+                },
+                "breadcrumb": []
+            }]
             for prop, json_schema in schema.properties.items():
                 inclusion = 'available'
                 if prop in key_properties or (stream.state_field and prop == stream.state_field):
@@ -101,7 +109,8 @@ class PipedriveTap(object):
                     logger.info('Resuming from {}'.format(resume_from_stream))
                     resume_from_stream = False
                 else:
-                    logger.info('Skipping stream {} as resuming from {}'.format(stream.schema, resume_from_stream))
+                    logger.info('Skipping stream {} as resuming from {}'.format(
+                        stream.schema, resume_from_stream))
                     continue
 
             # stream state, from state/bookmark or start_date
@@ -110,7 +119,8 @@ class PipedriveTap(object):
             # currently syncing
             if stream.state_field:
                 set_currently_syncing(self.state, stream.schema)
-                self.state = singer.write_bookmark(self.state, stream.schema, stream.state_field, str(stream.initial_state))
+                self.state = singer.write_bookmark(
+                    self.state, stream.schema, stream.state_field, str(stream.initial_state))
                 singer.write_state(self.state)
 
             # schema
@@ -119,12 +129,13 @@ class PipedriveTap(object):
             catalog_stream = catalog.get_stream(stream.schema)
             stream_metadata = metadata.to_map(catalog_stream.metadata)
 
-            if stream.id_list: # see if we want to iterate over a list of deal_ids
+            if stream.id_list:  # see if we want to iterate over a list of deal_ids
 
                 for deal_id in stream.get_deal_ids(self):
                     is_last_id = False
 
-                    if deal_id == stream.these_deals[-1]: #find out if this is last deal_id in the current set
+                    # find out if this is last deal_id in the current set
+                    if deal_id == stream.these_deals[-1]:
                         is_last_id = True
 
                     # if last page of deals, more_items in collection will be False
@@ -137,7 +148,8 @@ class PipedriveTap(object):
                     self.do_paginate(stream, stream_metadata)
 
                     if not is_last_id:
-                        stream.more_items_in_collection = True   #set back to True for pagination of next deal_id request
+                        # set back to True for pagination of next deal_id request
+                        stream.more_items_in_collection = True
                     elif is_last_id and stream.more_ids_to_get:  # need to get the next batch of deal_ids
                         stream.more_items_in_collection = True
                         stream.start = stream.next_start
@@ -192,9 +204,10 @@ class PipedriveTap(object):
                     for row in self.iterate_response(response):
                         row = stream.process_row(row)
 
-                        if not row: # in case of a non-empty response with an empty element
+                        if not row:  # in case of a non-empty response with an empty element
                             continue
-                        row = optimus_prime.transform(row, stream.get_schema(), stream_metadata)
+                        row = optimus_prime.transform(
+                            row, stream.get_schema(), stream_metadata)
                         if stream.write_record(row):
                             counter.increment()
                         stream.update_state(row)
@@ -225,7 +238,8 @@ class PipedriveTap(object):
             _params.update(params)
 
         url = "{}/{}".format(BASE_URL, endpoint)
-        logger.debug('Firing request at {} with params: {}'.format(url, _params))
+        logger.debug(
+            'Firing request at {} with params: {}'.format(url, _params))
 
         return requests.get(url, headers=headers, params=_params)
 
@@ -251,4 +265,3 @@ class PipedriveTap(object):
         else:
             logger.debug('Required headers for rate throttling are not present in response header, '
                          'unable to throttle ..')
-
