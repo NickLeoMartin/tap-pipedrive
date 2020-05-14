@@ -5,73 +5,139 @@
       "type": "integer"
     },
     "company_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "user_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "done": {
-      "type": ["null", "boolean"]
-    },
-    "type": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "boolean"
+      ]
     },
     "reference_type": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "reference_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "due_date": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "due_time": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "duration": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "add_time": {
-      "type": ["null", "string"],
+      "type": [
+        "null",
+        "string"
+      ],
       "format": "date-time"
     },
     "marked_as_done_time": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "subject": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "deal_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "org_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "person_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "active_flag": {
-      "type": ["null", "boolean"]
+      "type": [
+        "null",
+        "boolean"
+      ]
     },
     "update_time": {
-      "type": ["null", "string"],
+      "type": [
+        "null",
+        "string"
+      ],
       "format": "date-time"
     },
     "gcal_event_id": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "google_calendar_id": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "google_calendar_etag": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "note": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "participants": {
-      "type": ["null", "array"],
+      "type": [
+        "null",
+        "array"
+      ],
       "items": {
         "type": "object",
         "properties": {
@@ -85,28 +151,130 @@
       }
     },
     "person_name": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "org_name": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "deal_title": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "assigned_to_user_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "created_by_user_id": {
-      "type": ["null", "integer"]
+      "type": [
+        "null",
+        "integer"
+      ]
     },
     "owner_name": {
-      "type": ["null", "string"]
-    },
-    "person_dropbox_bcc": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     },
     "deal_dropbox_bcc": {
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "attendees": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "calendar_sync_include_context": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "file": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "last_notification_user_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "lead_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "lead_title": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "notification_language_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "rec_master_activity_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "rec_rule": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "rec_rule_extension": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "series": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "source_timezone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "person_dropbox_bcc": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "update_user_id": {
+      "type": [
+        "null",
+        "integer"
+      ]
     }
   }
 }
