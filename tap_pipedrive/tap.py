@@ -13,7 +13,6 @@ from .streams import (CurrenciesStream, ActivityTypesStream, FiltersStream, Stag
                       RecentFilesStream, RecentOrganizationsStream, RecentPersonsStream, RecentProductsStream,
                       RecentDeleteLogsStream, DealStageChangeStream, DealsProductsStream)
 
-
 logger = singer.get_logger()
 
 
@@ -44,7 +43,7 @@ class PipedriveTap(object):
         self.state = state
 
     def do_discover(self):
-        logger.info('Starting discover')
+        logger.info('Starting discovery')
 
         catalog = Catalog([])
 
@@ -63,6 +62,7 @@ class PipedriveTap(object):
                 },
                 "breadcrumb": []
             }]
+
             for prop, json_schema in schema.properties.items():
                 inclusion = 'available'
                 if prop in key_properties or (stream.state_field and prop == stream.state_field):
@@ -202,14 +202,20 @@ class PipedriveTap(object):
             with singer.metrics.record_counter(stream.schema) as counter:
                 with singer.Transformer(singer.NO_INTEGER_DATETIME_PARSING) as optimus_prime:
                     for row in self.iterate_response(response):
+
                         row = stream.process_row(row)
 
                         if not row:  # in case of a non-empty response with an empty element
                             continue
+
                         row = optimus_prime.transform(
-                            row, stream.get_schema(), stream_metadata)
+                            row,
+                            stream.get_schema(),
+                            stream_metadata)
+
                         if stream.write_record(row):
                             counter.increment()
+
                         stream.update_state(row)
 
     def get_default_config(self):
