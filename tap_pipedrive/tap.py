@@ -8,10 +8,14 @@ from singer import set_currently_syncing, metadata
 from singer.catalog import Catalog, CatalogEntry, Schema
 from .config import BASE_URL, CONFIG_DEFAULTS
 from .exceptions import InvalidResponseException
-from .streams import (CurrenciesStream, ActivityTypesStream, FiltersStream, StagesStream, PipelinesStream,
-                      RecentNotesStream, RecentUsersStream, RecentActivitiesStream, RecentDealsStream,
-                      RecentFilesStream, RecentOrganizationsStream, RecentPersonsStream, RecentProductsStream,
-                      RecentDeleteLogsStream, DealStageChangeStream, DealsProductsStream)
+from .streams import (
+    CurrenciesStream, ActivityTypesStream, FiltersStream, StagesStream,
+    PipelinesStream, RecentDealsStream, RecentProductsStream,
+    RecentNotesStream, RecentUsersStream, RecentActivitiesStream,
+    RecentFilesStream, RecentOrganizationsStream, RecentPersonsStream,
+    RecentDeleteLogsStream, DealStageChangeStream, DealsProductsStream,
+    DealFieldsStream
+)
 
 logger = singer.get_logger()
 
@@ -33,7 +37,8 @@ class PipedriveTap(object):
         RecentProductsStream(),
         RecentDeleteLogsStream(),
         DealStageChangeStream(),
-        DealsProductsStream()
+        DealsProductsStream(),
+        DealFieldsStream()
     ]
 
     def __init__(self, config, state):
@@ -265,9 +270,9 @@ class PipedriveTap(object):
         if all(x in response.headers for x in ['X-RateLimit-Remaining', 'X-RateLimit-Reset']):
             if int(response.headers['X-RateLimit-Remaining']) < 1:
                 seconds_to_sleep = int(response.headers['X-RateLimit-Reset'])
-                logger.debug('Hit API rate limits, no remaining requests per 10 seconds, will sleep '
-                             'for {} seconds now.'.format(seconds_to_sleep))
+                logger.info('Hit API rate limits, no remaining requests per 10 seconds, will sleep '
+                            'for {} seconds now.'.format(seconds_to_sleep))
                 time.sleep(seconds_to_sleep)
         else:
-            logger.debug('Required headers for rate throttling are not present in response header, '
-                         'unable to throttle ..')
+            logger.info('Required headers for rate throttling are not present in response header, '
+                        'unable to throttle ..')
