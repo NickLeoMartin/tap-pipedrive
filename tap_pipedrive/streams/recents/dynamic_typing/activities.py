@@ -11,4 +11,5 @@ class RecentActivitiesStream(DynamicTypingRecentsStream):
                      'deal_dropbox_bcc', 'deal_id', 'deal_title', 'done', 'due_date', 'due_time', 'duration',
                      'gcal_event_id', 'google_calendar_etag', 'google_calendar_id', 'id', 'marked_as_done_time', 'note',
                      'org_id', 'org_name', 'owner_name', 'participants', 'person_dropbox_bcc', 'person_id',
-                     'person_name', 'reference_id', 'reference_type', 'subject', 'type', 'update_time', 'user_id']
+                     'person_name', 'reference_id', 'reference_type', 'subject', 'type', 'update_time', 'user_id',
+                     'lead_title']
