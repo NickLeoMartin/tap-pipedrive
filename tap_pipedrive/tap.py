@@ -8,10 +8,14 @@ from singer import set_currently_syncing, metadata
 from singer.catalog import Catalog, CatalogEntry, Schema
 from .config import BASE_URL, CONFIG_DEFAULTS
 from .exceptions import InvalidResponseException
-from .streams import (CurrenciesStream, ActivityTypesStream, FiltersStream, StagesStream, PipelinesStream,
-                      RecentNotesStream, RecentUsersStream, RecentActivitiesStream, RecentDealsStream,
-                      RecentFilesStream, RecentOrganizationsStream, RecentPersonsStream, RecentProductsStream,
-                      RecentDeleteLogsStream, DealStageChangeStream, DealsProductsStream)
+from .streams import (
+    CurrenciesStream, ActivityTypesStream, FiltersStream, StagesStream,
+    PipelinesStream, RecentDealsStream, RecentProductsStream,
+    RecentNotesStream, RecentUsersStream, RecentActivitiesStream,
+    RecentFilesStream, RecentOrganizationsStream, RecentPersonsStream,
+    RecentDeleteLogsStream, DealStageChangeStream, DealsProductsStream,
+    DealFieldsStream
+)
 
 logger = singer.get_logger()
 
@@ -33,7 +37,8 @@ class PipedriveTap(object):
         RecentProductsStream(),
         RecentDeleteLogsStream(),
         DealStageChangeStream(),
-        DealsProductsStream()
+        DealsProductsStream(),
+        DealFieldsStream()
     ]
 
     def __init__(self, config, state):
