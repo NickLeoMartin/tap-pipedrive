@@ -125,7 +125,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "person_id": {
+          "id": {
             "type": [
               "null",
               "integer"
