@@ -128,7 +128,7 @@
           "id": {
             "type": [
               "null",
-              "integer"
+              "string"
             ]
           },
           "label": {
